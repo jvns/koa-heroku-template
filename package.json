@@ -1,0 +1,30 @@
+{
+  "name": "koa-heroku-template",
+  "version": "0.0.1",
+  "description": "A sample Node.js app using Koa.js for deploying to Heroku",
+  "author": {
+    "name": "Alexandre Kirillov",
+    "email": "alexandre.kirillov@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marexandre/koa-heroku-template"
+  },
+  "dependencies": {
+    "co-body": "^1.0.0",
+    "koa": "^0.12.2",
+    "koa-basic-auth": "^1.1.2",
+    "koa-logger": "^1.2.2",
+    "koa-router": "^3.4.0",
+    "koa-static": "^1.4.7"
+  },
+  "engines" : {
+    "node" : "0.11.14"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "koa"
+  ],
+  "license": "MIT"
+}
