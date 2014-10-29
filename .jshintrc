@@ -5,7 +5,7 @@
    */
 
    // Allow ES.next (ES6) syntax (ex: `const`)
-  "esnext": true
+  "esnext": true,
 
   // Prohibit use of == and != in favor of === and !==.
   "eqeqeq": true,
