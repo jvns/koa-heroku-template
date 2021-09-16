@@ -34,11 +34,21 @@ app.use(serve(__dirname + '/public'));
 /**
  * Index page
  */
-app.get('/', function *(next) {
+app.get('/', async function *(next) {
   var indexHTML = fs.readFileSync(__dirname + '/public/index.html', 'utf-8');
-
+  await test_pg();
   this.body = indexHTML;
 });
+
+async function test_pg() {
+    const { Client } = require('pg')
+    const client = new Client()
+    await client.connect()
+    const res = await client.query('SELECT $1::text as message', ['Hello world!'])
+    console.log(res.rows[0].message) // Hello world!
+    await client.end()
+}
+
 
 /**
  * Simple test for GET request
