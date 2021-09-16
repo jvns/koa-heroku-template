@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "description": "A sample Node.js app using Koa.js for deploying to Heroku",
   "author": {
-    "name": "Alexandre Kirillov",
-    "email": "alexandre.kirillov@gmail.com"
+    "name": "Julia Evans",
+    "email": "julia@jvns.ca"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/marexandre/koa-heroku-template"
+    "url": "https://github.com/jvns/koa-heroku-template"
   },
   "dependencies": {
     "koa": "^2.2.0",
