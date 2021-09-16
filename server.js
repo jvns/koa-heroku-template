@@ -4,6 +4,7 @@ const views = require('koa-views');
 const path = require('path');
 const Koa = require('koa');
 const app = module.exports = new Koa();
+const { Client } = require('pg')
 
 // middleware
 
@@ -30,7 +31,7 @@ async function list(ctx) {
 }
 
 async function test_pg() {
-    const { Client } = require('pg')
+    console.log(process.env.DATABASE_URL)
     const client = new Client({
         connectionString: process.env.DATABASE_URL,
         ssl: {
