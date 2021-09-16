@@ -34,9 +34,9 @@ app.use(serve(__dirname + '/public'));
 /**
  * Index page
  */
-app.get('/', async function *(next) {
+app.get('/', function *(next) {
   var indexHTML = fs.readFileSync(__dirname + '/public/index.html', 'utf-8');
-    //  await test_pg();
+  await test_pg();
   this.body = indexHTML;
 });
 
