@@ -31,7 +31,12 @@ async function list(ctx) {
 
 async function test_pg() {
     const { Client } = require('pg')
-    const client = new Client()
+    const client = new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    });
     await client.connect()
     const res = await client.query('SELECT $1::text as message', ['Hello world!'])
     console.log(res.rows[0].message) // Hello world!
