@@ -1,44 +1,42 @@
 var fs = require('fs');
-var parse = require('co-body');
 var logger = require('koa-logger');
-var auth = require('koa-basic-auth');
 var serve = require('koa-static');
-var route = require('koa-router');
-var koa = require('koa');
-var app = koa();
+const router = require('@koa/router')();
+const Koa = require('koa');
+const app = module.exports = new Koa();
 
 // Init logger
 app.use(logger());
 
-// BASIC auth
-// app.use(function *(next) {
-//   try {
-//     yield next;
-//   } catch (err) {
-//     if (401 == err.status) {
-//       this.status = 401;
-//       this.set('WWW-Authenticate', 'Basic');
-//       this.body = '<h1>:(</h1>';
-//     } else {
-//       throw err;
-//     }
-//   }
-// });
-// app.use(auth({ name: 'test', pass: 'test' }));
-
 // Init router
-app.use(route(app));
+router.get('/', list)
+  .get('/get-test', get_test)
+
+app.use(router.routes());
+
 // Init public dir for css, js and etc..
 app.use(serve(__dirname + '/public'));
 
 /**
  * Index page
  */
-app.get('/', async function(ctx, next) {
+
+async function list(ctx) {
   var indexHTML = fs.readFileSync(__dirname + '/public/index.html', 'utf-8');
-  await test_pg();
-  this.body = indexHTML;
-});
+  //await test_pg();
+  console.log(ctx)
+  await ctx.render('list', indexHTML);
+}
+
+async function get_test(ctx) {
+  var data = {
+    'title': 'Koa test application',
+    'body': 'Hello World!'
+  };
+
+  await ctx.render('show', data);
+}
+
 
 async function test_pg() {
     const { Client } = require('pg')
@@ -48,35 +46,6 @@ async function test_pg() {
     console.log(res.rows[0].message) // Hello world!
     await client.end()
 }
-
-
-/**
- * Simple test for GET request
- */
-app.get('/get-test', function *(next) {
-  var data = {
-    'title': 'Koa test application',
-    'body': 'Hello World!'
-  };
-
-  this.body = data;
-});
-
-/**
- * Simple test for POST request
- */
-app.post('/post-test', function *(next) {
-  // parse POST request
-  var body = yield parse.json(this);
-
-  var data = {
-    'title': body.title,
-    'body' : body.body
-  };
-
-  this.body = data;
-});
-
 
 var port = process.env.PORT || 3000;
 app.listen(port);
