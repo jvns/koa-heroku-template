@@ -27,7 +27,7 @@ app.use(router.routes());
 
 async function list(ctx) {
   await test_pg();
-  await ctx.render('index', {});
+  await ctx.render('index', {name: "Winnie The Pooh"});
 }
 
 async function test_pg() {
