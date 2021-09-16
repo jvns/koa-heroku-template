@@ -36,7 +36,7 @@ app.use(serve(__dirname + '/public'));
  */
 app.get('/', async function *(next) {
   var indexHTML = fs.readFileSync(__dirname + '/public/index.html', 'utf-8');
-  await test_pg();
+    //  await test_pg();
   this.body = indexHTML;
 });
 
